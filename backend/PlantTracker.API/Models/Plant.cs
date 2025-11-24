@@ -4,6 +4,7 @@ public class Plant
 {
     public int Id { get; set; }
     public int UserId { get; set; }
+    public User User { get; set; } = null!; // Navigation property to User
     public string Name { get; set; } = string.Empty;
     public string Type { get; set; } = string.Empty; // e.g., "Olive Tree", "Tomato", "Cucumber"
     public string Description { get; set; } = string.Empty;
@@ -30,6 +31,7 @@ public class WateringLog
 {
     public int Id { get; set; }
     public int PlantId { get; set; }
+    public Plant Plant { get; set; } = null!; // Navigation property to Plant
     public DateTime WateredDate { get; set; }
     public string? Notes { get; set; }
 }
@@ -38,6 +40,7 @@ public class CareTask
 {
     public int Id { get; set; }
     public int PlantId { get; set; }
+    public Plant Plant { get; set; } = null!; // Navigation property to Plant
     public string TaskName { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
     public DateTime? DueDate { get; set; }

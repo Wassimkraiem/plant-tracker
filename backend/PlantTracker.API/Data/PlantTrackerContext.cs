@@ -18,6 +18,29 @@ public class PlantTrackerContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
+        // Configure relationships using Fluent API
+        
+        // User → Plants (One-to-Many)
+        modelBuilder.Entity<Plant>()
+            .HasOne(p => p.User)                    // Plant has ONE User
+            .WithMany(u => u.Plants)                // User has MANY Plants
+            .HasForeignKey(p => p.UserId)           // Foreign Key is UserId
+            .OnDelete(DeleteBehavior.Cascade);      // Delete Plants when User is deleted
+
+        // Plant → WateringLogs (One-to-Many)
+        modelBuilder.Entity<WateringLog>()
+            .HasOne(wl => wl.Plant)                 // WateringLog has ONE Plant
+            .WithMany(p => p.WateringLogs)          // Plant has MANY WateringLogs
+            .HasForeignKey(wl => wl.PlantId)        // Foreign Key is PlantId
+            .OnDelete(DeleteBehavior.Cascade);      // Delete logs when Plant is deleted
+
+        // Plant → CareTasks (One-to-Many)
+        modelBuilder.Entity<CareTask>()
+            .HasOne(ct => ct.Plant)                 // CareTask has ONE Plant
+            .WithMany(p => p.CareTasks)             // Plant has MANY CareTasks
+            .HasForeignKey(ct => ct.PlantId)        // Foreign Key is PlantId
+            .OnDelete(DeleteBehavior.Cascade);      // Delete tasks when Plant is deleted
+
         // Seed demo user
         modelBuilder.Entity<User>().HasData(
             new User
