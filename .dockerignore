@@ -1,0 +1,14 @@
+**/.git
+**/.gitignore
+**/.vs
+**/.vscode
+**/node_modules
+**/npm-debug.log
+**/.next
+**/bin
+**/obj
+**/*.db
+**/*.db-shm
+**/*.db-wal
+README.md
+

@@ -1,0 +1,41 @@
+services:
+  backend:
+    build:
+      context: ./backend/PlantTracker.API
+      dockerfile: Dockerfile
+    container_name: plant-tracker-backend
+    ports:
+      - "5000:5000"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5000
+    volumes:
+      - ./backend/PlantTracker.API:/app
+      - backend-data:/app
+    networks:
+      - plant-tracker-network
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: plant-tracker-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:5000
+    depends_on:
+      - backend
+    networks:
+      - plant-tracker-network
+    restart: unless-stopped
+
+volumes:
+  backend-data:
+    driver: local
+
+networks:
+  plant-tracker-network:
+    driver: bridge
+
