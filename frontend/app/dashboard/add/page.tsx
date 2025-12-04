@@ -35,6 +35,11 @@ export default function AddPlant() {
         sunlightRequirements: selectedGuide.sunlight,
         soilType: selectedGuide.soil,
         harvestingInfo: selectedGuide.harvestTime || '',
+        careInstructions: selectedGuide.careInstructions || '',
+        fertilizingSchedule: selectedGuide.fertilizingSchedule || '',
+        pruningTips: selectedGuide.pruningTips || '',
+        commonPests: selectedGuide.commonPests || '',
+        growthStages: selectedGuide.growthStages || '',
       }))
     }
   }
@@ -381,7 +386,7 @@ export default function AddPlant() {
                   <span>Auto-fill Recommended Values</span>
                 </button>
                 <p className="text-xs text-gray-600 text-center">
-                  This will populate watering frequency, sunlight, soil, and harvest fields
+                  This will populate all care fields with recommended values
                 </p>
               </div>
             </div>

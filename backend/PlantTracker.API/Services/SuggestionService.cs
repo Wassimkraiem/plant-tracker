@@ -322,41 +322,75 @@ public class SuggestionService : ISuggestionService
             {
                 ("Pinch Suckers", "Remove suckers (shoots between stem and branches) weekly for larger fruits and better air circulation.", "✂️"),
                 ("Support Check", "Ensure tomato cages or stakes are secure. Heavy fruit can cause plants to topple.", "🎋"),
-                ("Leaf Health", "Check undersides of leaves for pests like hornworms or aphids. Early detection prevents major infestations.", "🔍")
+                ("Leaf Health", "Check undersides of leaves for pests like hornworms or aphids. Early detection prevents major infestations.", "🔍"),
+                ("Mulching", "Add mulch around the base to retain moisture and prevent soil-borne diseases.", "🍂"),
+                ("Consistent Watering", "Water consistently to prevent cracking and blossom end rot.", "💧")
             },
             "Cucumber" => new[]
             {
                 ("Daily Harvest", "Check for cucumbers daily once fruiting begins. Harvest promptly to encourage more production.", "🥒"),
                 ("Trellis Training", "Train vines up trellis for better air circulation and easier harvesting.", "🌿"),
-                ("Powdery Mildew", "Watch for white powder on leaves. Ensure good air flow and avoid watering leaves.", "🍃")
+                ("Powdery Mildew", "Watch for white powder on leaves. Ensure good air flow and avoid watering leaves.", "🍃"),
+                ("Bitter Cucumber", "Bitterness can be caused by heat stress or inconsistent watering.", "⚠️"),
+                ("Pollination", "If fruits shrivel and drop, pollination may be poor. Attract bees!", "🐝")
             },
             "Pepper" => new[]
             {
                 ("First Flowers", "Consider pinching off the first few flowers to encourage stronger plant growth before fruiting.", "🌸"),
                 ("Calcium Boost", "Add crushed eggshells or calcium supplement to prevent blossom end rot.", "🥚"),
-                ("Color Development", "Peppers change color as they ripen. Green to red takes 2-3 additional weeks but sweeter flavor.", "🫑")
+                ("Color Development", "Peppers change color as they ripen. Green to red takes 2-3 additional weeks but sweeter flavor.", "🫑"),
+                ("Sun Scald", "Provide some afternoon shade if peppers are getting sun-bleached spots.", "☀️"),
+                ("Support", "Stake peppers early to prevent branch breakage under fruit load.", "🎋")
             },
             "Olive Tree" => new[]
             {
                 ("Drainage Check", "Ensure excellent drainage. Olives hate wet feet - root rot is a common issue.", "💧"),
                 ("Pruning Shape", "Maintain open center structure for sunlight penetration and air circulation.", "✂️"),
-                ("Patience", "Olive trees take 5-8 years to produce fruit. Focus on strong growth in early years.", "⏳")
+                ("Patience", "Olive trees take 5-8 years to produce fruit. Focus on strong growth in early years.", "⏳"),
+                ("Winter Protection", "If temperatures drop below 20°F (-6°C), protect young trees.", "❄️"),
+                ("Pollination", "Olive trees are wind-pollinated. Shake branches gently if indoor to help.", "💨")
+            },
+            "Carrot" => new[]
+            {
+                ("Thinning", "Thin seedlings to 2-3 inches apart to allow roots to expand properly.", "📏"),
+                ("Weeding", "Carrots compete poorly with weeds. Keep the bed weed-free.", "🌿"),
+                ("Watering", "Keep soil consistently moist during germination which can take up to 3 weeks.", "💧"),
+                ("Harvesting", "Harvest when the shoulder (top) of the carrot is about 3/4 inch in diameter.", "🥕")
+            },
+            "Lettuce" => new[]
+            {
+                ("Cool Temps", "Lettuce thrives in cool weather. Shade it during hot afternoons.", "☁️"),
+                ("Bolting", "If the plant sends up a tall stalk, it's bolting (going to seed) and will turn bitter.", "🥀"),
+                ("Harvest", "Pick outer leaves for cut-and-come-again harvest to extend the season.", "🥗"),
+                ("Slugs", "Watch for slug damage (holes in leaves) especially after rain.", "🐌")
+            },
+             "Herbs" => new[]
+            {
+                ("Harvesting", "Harvest in the morning after dew dries for best oil concentration.", "🌿"),
+                ("Pruning", "Pinch back tips frequently to encourage bushy growth.", "✂️"),
+                ("Flowering", "Pinch off flower buds to keep the plant focusing on leaf production.", "🌸"),
+                ("Overwatering", "Most herbs prefer soil to dry out slightly between waterings.", "💧")
             },
             _ => Array.Empty<(string, string, string)>()
         };
 
-        var random = new Random(plant.Id + DateTime.UtcNow.DayOfYear);
+        var random = new Random(); // Remove seed for true randomness
         if (tips.Length > 0)
         {
-            var tip = tips[random.Next(tips.Length)];
-            suggestions.Add(new Suggestion
+            // Select 2 random tips instead of 1
+            var selectedTips = tips.OrderBy(x => random.Next()).Take(2);
+            
+            foreach (var tip in selectedTips)
             {
-                Type = "tip",
-                Title = tip.Item1,
-                Message = $"{plant.Name}: {tip.Item2}",
-                Icon = tip.Item3,
-                Priority = 2
-            });
+                suggestions.Add(new Suggestion
+                {
+                    Type = "tip",
+                    Title = tip.Item1,
+                    Message = $"{plant.Name}: {tip.Item2}",
+                    Icon = tip.Item3,
+                    Priority = 2
+                });
+            }
         }
     }
 

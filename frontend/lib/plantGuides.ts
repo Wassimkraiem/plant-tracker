@@ -6,6 +6,11 @@ export interface PlantGuide {
   sunlight: string
   soil: string
   harvestTime?: string
+  careInstructions?: string
+  fertilizingSchedule?: string
+  pruningTips?: string
+  commonPests?: string
+  growthStages?: string
 }
 
 export const plantGuides: Record<string, PlantGuide> = {
@@ -24,6 +29,11 @@ export const plantGuides: Record<string, PlantGuide> = {
     sunlight: 'Full sun (6-8 hours daily)',
     soil: 'Well-draining, sandy loam, pH 5.5-8.5',
     harvestTime: 'Fall (September-November)',
+    careInstructions: 'Requires patience as growth is slow. Protect from frost and extreme cold. Water deeply to encourage deep root growth.',
+    fertilizingSchedule: 'Apply nitrogen-rich fertilizer in early spring and late summer. Avoid fertilizing in late autumn.',
+    pruningTips: 'Prune in late winter (Feb-March) to maintain shape, remove dead wood, and open the canopy for light.',
+    commonPests: 'Olive fruit fly, scale insects, peacock spot (fungal disease).',
+    growthStages: 'Slow growing. First fruit typically after 3-5 years. Full production 7-9 years.',
   },
   'Tomato': {
     type: 'Tomato',
@@ -40,6 +50,11 @@ export const plantGuides: Record<string, PlantGuide> = {
     sunlight: 'Full sun (6-8 hours minimum)',
     soil: 'Rich, well-draining, pH 6.0-6.8',
     harvestTime: '60-80 days after transplanting',
+    careInstructions: 'Support plants with stakes or cages immediately after planting. Mulch to retain moisture and prevent soil-borne diseases.',
+    fertilizingSchedule: 'Balanced fertilizer at planting. Switch to low-nitrogen, high-phosphorus fertilizer when flowering starts.',
+    pruningTips: 'Remove "suckers" (shoots between stem and branch) to focus energy on fruit. Remove lower leaves to improve air circulation.',
+    commonPests: 'Tomato hornworms, aphids, whiteflies, early/late blight, blossom end rot.',
+    growthStages: 'Seedling -> Vegetative Growth -> Flowering -> Fruit Set -> Ripening (60-80 days total).',
   },
   'Cucumber': {
     type: 'Cucumber',
@@ -56,6 +71,11 @@ export const plantGuides: Record<string, PlantGuide> = {
     sunlight: 'Full sun (6-8 hours daily)',
     soil: 'Rich, loose soil, pH 6.0-7.0',
     harvestTime: '50-70 days from planting',
+    careInstructions: 'Avoid wetting leaves when watering to prevent mildew. Train vines up a trellis for cleaner fruit and better airflow.',
+    fertilizingSchedule: 'Mix compost into soil before planting. Side dress with balanced fertilizer when first flowers appear.',
+    pruningTips: 'Prune main stem after 7 leaves if not trellising to encourage side shoots. Remove yellowing lower leaves.',
+    commonPests: 'Cucumber beetles, aphids, squash bugs, powdery mildew.',
+    growthStages: 'Fast growing. Flowering starts 35-45 days. Harvest 50-70 days.',
   },
   'Pepper': {
     type: 'Pepper',
@@ -72,6 +92,11 @@ export const plantGuides: Record<string, PlantGuide> = {
     sunlight: 'Full sun (6-8 hours), warm temps',
     soil: 'Well-draining, nutrient-rich, pH 6.0-6.8',
     harvestTime: 'Green: 60-80 days, Colored: 80-100 days',
+    careInstructions: 'Keep plants warm. Stake if heavy fruit load causes bending. Mulch to maintain even soil moisture.',
+    fertilizingSchedule: 'Balanced fertilizer. Avoid excessive nitrogen which reduces fruit set. Add magnesium (Epsom salts) if leaves yellow.',
+    pruningTips: 'Pinch off early flowers to encourage stronger vegetative growth first. Prune bottom leaves to prevent soil splash.',
+    commonPests: 'Aphids, spider mites, flea beetles, blossom end rot (calcium deficiency).',
+    growthStages: 'Slow establishment -> Flowering -> Fruiting -> Ripening (60-90 days).',
   },
   'Carrot': {
     type: 'Carrot',
@@ -88,6 +113,11 @@ export const plantGuides: Record<string, PlantGuide> = {
     sunlight: 'Full sun to partial shade',
     soil: 'Loose, deep, sandy soil, pH 6.0-6.8',
     harvestTime: '60-80 days from seed',
+    careInstructions: 'Keep soil surface moist for germination (can take 2-3 weeks). Weed carefully to avoid disturbing roots.',
+    fertilizingSchedule: 'Low nitrogen, high potassium/phosphate for root development. Avoid fresh manure (causes forking).',
+    pruningTips: 'Thin seedlings aggressively to 2-3 inches apart to prevent overcrowding and small roots.',
+    commonPests: 'Carrot rust fly, wireworms, parsley worms.',
+    growthStages: 'Germination (slow) -> Leaf growth -> Root enlargement -> Harvest.',
   },
   'Lettuce': {
     type: 'Lettuce',
@@ -104,6 +134,11 @@ export const plantGuides: Record<string, PlantGuide> = {
     sunlight: 'Full sun to partial shade',
     soil: 'Rich, moist soil, pH 6.0-7.0',
     harvestTime: '30-60 days from planting',
+    careInstructions: 'Keep cool and moist. Use shade cloth in hot summer months. Mulch to keep soil cool.',
+    fertilizingSchedule: 'Nitrogen-rich fertilizer or compost tea every 2-3 weeks for leafy growth.',
+    pruningTips: 'Harvest outer leaves (cut-and-come-again) or cut entire head. Remove bolting (flowering) stalks immediately.',
+    commonPests: 'Slugs, snails, aphids, cutworms.',
+    growthStages: 'Fast germination -> Leaf rosette -> Harvest -> Bolting (seed production).',
   },
   'Herbs': {
     type: 'Herbs',
@@ -120,6 +155,11 @@ export const plantGuides: Record<string, PlantGuide> = {
     sunlight: '4-6 hours of sun daily',
     soil: 'Well-draining, pH 6.0-7.0',
     harvestTime: 'Continuous harvest after establishment',
+    careInstructions: 'Avoid overwatering. Most herbs prefer slightly dry conditions between waterings. Ensure good air circulation.',
+    fertilizingSchedule: 'Light feeding only. Too much fertilizer reduces flavor and aroma.',
+    pruningTips: 'Harvest frequently. Pinch back growing tips to encourage bushiness. Remove flowers to prolong life.',
+    commonPests: 'Aphids, spider mites, whiteflies.',
+    growthStages: 'Varies. Most are ready for light harvest in 3-4 weeks from transplant.',
   },
   'Other': {
     type: 'Other',
@@ -136,6 +176,10 @@ export const plantGuides: Record<string, PlantGuide> = {
     sunlight: 'Varies by plant type',
     soil: 'Varies by plant type',
     harvestTime: 'Varies by plant type',
+    careInstructions: 'Research specific care requirements for this plant species.',
+    fertilizingSchedule: 'Varies by plant type.',
+    pruningTips: 'Remove dead or diseased parts. Research specific pruning needs.',
+    commonPests: 'Monitor for common garden pests.',
+    growthStages: 'Varies by plant type.',
   },
 }
-

@@ -5,16 +5,30 @@ using Microsoft.IdentityModel.Tokens;
 using PlantTracker.API.Data;
 using PlantTracker.API.Services;
 
+using System.Text.Json.Serialization;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Add DbContext
 builder.Services.AddDbContext<PlantTrackerContext>(options =>
-    options.UseSqlite("Data Source=plantracker.db"));
+{
+    // Check if running in Docker container
+    var inContainer = Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true";
+    var connectionString = inContainer 
+        ? "Data Source=/data/plantracker.db"
+        : "Data Source=plantracker.db";
+        
+    options.UseSqlite(connectionString);
+});
 
 // Add Authentication Services
 builder.Services.AddScoped<IAuthService, AuthService>();
@@ -61,6 +75,11 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<PlantTrackerContext>();
+    var inContainer = Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true";
+    if (inContainer && !Directory.Exists("/data"))
+    {
+        Directory.CreateDirectory("/data");
+    }
     context.Database.EnsureCreated();
 }
 

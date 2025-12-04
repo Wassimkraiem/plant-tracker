@@ -10,8 +10,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:5000
     volumes:
-      - ./backend/PlantTracker.API:/app
-      - backend-data:/app
+      - backend-data:/data
     networks:
       - plant-tracker-network
     restart: unless-stopped
