@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useAuth } from '@/contexts/AuthContext'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
+import ChatBot from '@/components/ChatBot'
 
 export default function DashboardLayout({
   children,
@@ -55,8 +56,9 @@ export default function DashboardLayout({
           </div>
         </div>
       </nav>
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-4 py-8 relative">
         {children}
+        <ChatBot />
       </main>
     </>
   )
